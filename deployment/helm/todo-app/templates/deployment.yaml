@@ -24,7 +24,7 @@ spec:
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      serviceAccountName: {{ include "todo-app.serviceAccountName" . }}
+      # serviceAccountName: {{ include "todo-app.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
@@ -47,6 +47,22 @@ spec:
               port: http
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
+          env:
+          {{- if .Values.env.normal -}}
+          {{- range .Values.env.normal }}
+            - name: {{ .name }}
+              value: {{ .value | quote }}
+          {{- end -}}
+          {{- end }}
+          {{- if .Values.env.secret -}}
+          {{- range .Values.env.secret }}
+            - name: {{ .name }}
+              valueFrom:
+                secretKeyRef:
+                  name: app-env-secret
+                  key: {{ .key }}
+          {{- end -}}
+          {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
