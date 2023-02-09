@@ -8,7 +8,7 @@ Cần đảm bảo đã có database và sẵn sàng kết nối. Nên lần đ�
 
 ### Kubernetes
 
-``
+```
 cd deployment\helm
 
 helm upgrade -i mypostgresql -f postgres/values.yaml bitnami/postgresql
