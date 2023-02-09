@@ -2,7 +2,7 @@ version: "3"
 
 services:
   todo-app:
-    image: ghcr.io/MamNonDevOps/todo-dotnet/todo-image:0.1.0
+    image: ghcr.io/mamnondevops/todo-dotnet/todo-image:0.1.0
     build:
       context: .
       dockerfile: Dockerfile

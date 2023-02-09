@@ -5,14 +5,14 @@
 replicaCount: 1
 
 image:
-  repository: nginx
+  repository: ghcr.io/mamnondevops/todo-dotnet/todo-image
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: ""
+  tag: "0.1.0"
 
 imagePullSecrets: []
 nameOverride: ""
-fullnameOverride: ""
+fullnameOverride: "todo-app"
 
 serviceAccount:
   # Specifies whether a service account should be created
@@ -80,3 +80,10 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
+
+env:
+  normal:
+    - name: ASPNETCORE_ENVIRONMENT
+      value: Development
+    - name: ConnectionStrings__db
+      value: Server=mypostgresql;Port=5432;Database=postgres;User Id=postgres;Password=P@ssw0rd;
