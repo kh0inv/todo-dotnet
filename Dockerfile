@@ -15,7 +15,7 @@ FROM build AS publish
 RUN dotnet publish "todo-dotnet6.csproj" -c Release -o /app/publish
 
 FROM base AS final
-LABEL org.opencontainers.image.source="https://github.com/thangchung/todo-bicep/todo-container"
+LABEL org.opencontainers.image.source="https://github.com/mamnondevops/todo-dotnet/todo-image"
 WORKDIR /app
 COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "todo-dotnet6.dll"]
